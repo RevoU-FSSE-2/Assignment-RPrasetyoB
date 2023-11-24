@@ -73,6 +73,17 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 | Flag spam    | POST    | /moderation/tweet          | bearer_token, moderator role     | tweet.id, is_spam       |
 | Suspend user | POST    | /moderation/user           | bearer_token, moderator role     | user.id, is_suspended   |
 
+### Some feature images :
+- Suspended user in database: <br>
+![Screenshot_3](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/5057ebcd-8c8a-4da3-8962-baf613579a23)
+
+- Suspended user cannot create tweet: <br>
+![Screenshot_4](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/73b50eb6-95d2-4076-962b-fe519ea6a50b)
+
+- Flag Spam tweets in database: <br>
+![Screenshot_2](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/a20e1166-5bb3-477e-8e67-f02206c4c37e)
+
+
 ### User for Testing
 
 - Moderator
@@ -84,7 +95,7 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 }
 ```
 
-- user
+- User
 
 ```json
 {
