@@ -4,7 +4,9 @@ from app.user.models import User
 from db import db
 import jwt, os
 from datetime import datetime, timedelta
-from marshmallow import Schema, fields, ValidationError
+from marshmallow import Schema, fields, ValidationError, validates_schema
+from app.common.constants import UserRoleEnum
+
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -12,7 +14,13 @@ class UserRegistrationSchema(Schema):
     username = fields.String(required=True, validate=lambda x: not User.query.filter_by(username=x).first(), error="Username already exists.")
     password = fields.String(required=True)
     bio = fields.String(required=True)
-    role = fields.String(required=True)
+    role = fields.String(default=UserRoleEnum.USER.value)
+
+    @validates_schema
+    def validate_role(self, data, **kwargs):
+        role = data.get('role', UserRoleEnum.USER.value)
+        if role not in [role.value for role in UserRoleEnum]:
+            raise ValidationError("Hanya 'moderator' atau 'user' yang diizinkan untuk role")
 
 @auth_bp.route("/registration", methods=["POST"])
 def register():
@@ -25,9 +33,11 @@ def register():
             return {"success": False, "error": "username sudah digunakan"}, 400
         else:
             return {"success": False, "error": err.messages}, 400
+        
+    role = data.get('role', 'user')
 
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    new_user = User(username=data['username'], password=hashed_password, bio=data['bio'], role=data['role'])
+    new_user = User(username=data['username'], password=hashed_password, bio=data['bio'], role=role)
     db.session.add(new_user)
     db.session.commit()
 
@@ -35,8 +45,7 @@ def register():
         'success': True,
         'id': new_user.id,
         'username': new_user.username,
-        'bio': new_user.bio,
-        'role': new_user.role
+        'bio': new_user.bio
     }
 
 

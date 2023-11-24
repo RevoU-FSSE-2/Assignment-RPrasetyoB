@@ -1,4 +1,3 @@
-# app/tweet/apis.py
 from flask import Blueprint, request, jsonify
 from app.user.models import User
 from app.tweet.models import Tweet
@@ -10,9 +9,8 @@ tweet_bp = Blueprint('tweet', __name__)
 
 @tweet_bp.route('', methods=['POST'])
 def create_tweet():
-    token = request.headers.get('Authorization')
-
-    token = token.split()[1]
+    getToken = request.headers.get('Authorization')
+    token = getToken.split()[1]
 
     payload = decode_jwt(token)
     if not payload:
@@ -23,6 +21,9 @@ def create_tweet():
     user = User.query.get(user_id)
     if not user:
         return jsonify({"error_message": "User not found"}), 404
+    
+    if user.is_suspended:
+        return jsonify({"error_message": "User saat ini sedang disuspend, tidak bisa membuat tweet baru. hubungi moderator untuk membatalkan suspend."}), 403
 
     data = request.get_json()
     tweet_text = data.get('tweet', '')

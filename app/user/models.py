@@ -11,6 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable=False)
     bio = db.Column(db.String(255))
     role = db.Column(db.String(20), nullable=False)
+    is_suspended = db.Column(db.Boolean, nullable=False, default=False)
     
     following = db.relationship(
         'User', secondary=follow,

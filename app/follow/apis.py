@@ -1,4 +1,3 @@
-# app/follow/apis.py
 from flask import Blueprint, request, jsonify
 from app.user.models import User
 from app.auth.utils import decode_jwt
@@ -8,9 +7,8 @@ follow_bp = Blueprint('follow', __name__)
 
 @follow_bp.route('/<int:user_id_to_follow>', methods=['POST'])
 def follow_unfollow(user_id_to_follow):
-    token = request.headers.get('Authorization')
-
-    token = token.split()[1]
+    getToken = request.headers.get('Authorization')
+    token = getToken.split()[1]
 
     payload = decode_jwt(token)
     if not payload:

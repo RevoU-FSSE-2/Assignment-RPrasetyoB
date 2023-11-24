@@ -7,6 +7,7 @@ class Tweet(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     published_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     tweet_text = db.Column(db.String(150), nullable=False)
+    is_spam = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f'<Tweet {self.id}>'
