@@ -10,7 +10,7 @@ follow_bp = Blueprint('follow', __name__)
 def follow_unfollow(user_id_to_follow):
     token = request.headers.get('Authorization')
 
-    token = token.split()[1]  # Extract the token from "Token <token>"
+    token = token.split()[1]
 
     payload = decode_jwt(token)
     if not payload:
@@ -29,14 +29,12 @@ def follow_unfollow(user_id_to_follow):
     if current_user == user_to_follow:
         return jsonify({"error_message": "Tidak bisa follow diri sendiri"}), 400
 
-    # Check if the current user is already following the target user
     if current_user.is_following(user_to_follow):
-        # Unfollow
+        
         current_user.unfollow(user_to_follow)
         db.session.commit()
         return jsonify({"following_status": "unfollow"}), 200
     else:
-        # Follow
         current_user.follow(user_to_follow)
         db.session.commit()
         return jsonify({"following_status": "following"}), 200

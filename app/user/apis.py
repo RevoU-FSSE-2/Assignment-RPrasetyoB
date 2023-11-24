@@ -11,28 +11,23 @@ def get_user_profile():
     if not token or not token.startswith('Bearer '):
         return {"error": "Invalid token format"}, 401
 
-    token = token.split()[1]  # Extract the token from "Token <token>"
+    token = token.split()[1]
 
-    # Decode the JWT to get user information
     payload = decode_jwt(token)
     if not payload:
         return jsonify({"error_message": "Token tidak valid"}), 401
 
     user_id = payload["user_id"]
 
-    # Get the user from the database
     user = User.query.get(user_id)
     if not user:
         return jsonify({"error_message": "User not found"}), 404
 
-    # Get the user's followers and following count
     followers_count = user.followers.count()
     following_count = user.following.count()
 
-    # Get the user's tweets
     tweets = Tweet.query.filter_by(user_id=user.id).all()
 
-    # Format the response
     response = {
         "user_id": user.id,
         "username": user.username,

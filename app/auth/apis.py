@@ -23,7 +23,7 @@ def register():
         data = schema.load(data)
     except ValidationError as err:
         if 'username' in err.messages:
-            return {"success": False, "error": "Username already exists."}, 400
+            return {"success": False, "error": "username sudah digunakan"}, 400
         else:
             return {"success": False, "error": err.messages}, 400
 
@@ -51,11 +51,11 @@ def login():
 
     user = User.query.filter_by(username=username).first()
     if not user:
-        return {"error": "User or password is not valid"}, 400
+        return {"error": "User atau password tidak tepat"}, 400
     
     valid_password = bcrypt.check_password_hash(user.password, password)
     if not valid_password:
-        return {"error": "User or password is not valid"}, 400
+        return {"error": "User atau password tidak tepat"}, 400
     
     payload = {
         'user_id': user.id,
