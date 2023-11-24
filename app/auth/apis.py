@@ -10,7 +10,6 @@ auth_bp = Blueprint("auth", __name__)
 
 class UserRegistrationSchema(Schema):
     username = fields.String(required=True, validate=lambda x: not User.query.filter_by(username=x).first(), error="Username already exists.")
-    email = fields.Email(required=True)
     password = fields.String(required=True)
     bio = fields.String(required=True)
     role = fields.String(required=True)
@@ -28,7 +27,7 @@ def register():
             return {"success": False, "error": err.messages}, 400
 
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    new_user = User(username=data['username'], email=data['email'], password=hashed_password, bio=data['bio'], role=data['role'])
+    new_user = User(username=data['username'], password=hashed_password, bio=data['bio'], role=data['role'])
     db.session.add(new_user)
     db.session.commit()
 
@@ -36,7 +35,6 @@ def register():
         'success': True,
         'id': new_user.id,
         'username': new_user.username,
-        'email': new_user.email,
         'bio': new_user.bio,
         'role': new_user.role
     }
@@ -60,7 +58,7 @@ def login():
     payload = {
         'user_id': user.id,
         'username': user.username,
-        'email': user.email,
+        'role': user.role,
         'exp': datetime.utcnow() + timedelta(minutes=15)
     }
     token = jwt.encode(payload, os.getenv('SECRET_KEY'), algorithm="HS256")

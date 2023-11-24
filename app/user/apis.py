@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
-from app.user.models import Tweet, User
+from app.user.models import User
+from app.tweet.models import Tweet
 from app.auth.utils import decode_jwt
 
 user_bp = Blueprint("user", __name__)

@@ -1,6 +1,7 @@
 # app/tweet/apis.py
 from flask import Blueprint, request, jsonify
-from app.user.models import User, Tweet
+from app.user.models import User
+from app.tweet.models import Tweet
 from app.auth.utils import decode_jwt
 from db import db
 from datetime import datetime
