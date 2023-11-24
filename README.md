@@ -63,15 +63,15 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 
 [week21.postman_collection.json - Google Drive](https://drive.google.com/file/d/1I-ZAI0Ltrneg7fRYU1R4NQBLAEKiKoBb/view?usp=sharing)
 
-|              | Methods | Endpoint                   | Authorization      | Body                    |
+|              | Methods | Endpoint                   | Requirement & Authorization | Body                    |
 |:------------ |:-------:|:--------------------------:|:------------------:|:-----------------------:|
 | Register     | POST    | /auth/registration         | -                  | username, bio, password |
 | Login        | POST    | /auth/login                | -                  | username, password      |
-| Create Tweet | POST    | /tweet                     | user is_suspended? | tweet                   |
-| User Profile | GET     | /user-profile              | token              | -                       |
-| Follow       | POST    | /following/:target_user.id | token              | -                       |
-| Flag spam    | POST    | /moderation/tweet          | moderator role     | tweet.id, is_spam       |
-| Suspend user | POST    | /moderation/user           | moderator role     | user.id, is_suspended   |
+| Create Tweet | POST    | /tweet                     | bearer_token, user is_suspended? | tweet                   |
+| User Profile | GET     | /user-profile              | bearer_token              | -                       |
+| Follow       | POST    | /following/:target_user.id | bearer_token              | -                       |
+| Flag spam    | POST    | /moderation/tweet          | bearer_token, moderator role     | tweet.id, is_spam       |
+| Suspend user | POST    | /moderation/user           | bearer_token, moderator role     | user.id, is_suspended   |
 
 ### User for Testing
 
