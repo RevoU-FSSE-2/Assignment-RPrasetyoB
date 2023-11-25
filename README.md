@@ -66,7 +66,7 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 |              | Methods | Endpoint                   | Requirement & Authorization | Body                    |
 |:------------ |:-------:|:--------------------------:|:------------------:|:-----------------------:|
 | Register     | POST    | /auth/registration         | -                  | username, bio, password |
-| Login        | POST    | /auth/login                | -                  | username, password      |
+| Login        | POST    | /auth/login                | user is_suspended?                  | username, password      |
 | Create Tweet | POST    | /tweet                     | bearer_token, user is_suspended? | tweet                   |
 | User Profile | GET     | /user-profile              | bearer_token              | -                       |
 | Follow       | POST    | /following/:target_user.id | bearer_token              | -                       |
