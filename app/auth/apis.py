@@ -65,7 +65,7 @@ def login():
         return {"error": "Username atau password tidak tepat"}, 400
     
     if user.is_suspended:
-        return jsonify({"error_message": "akun telah di suspend."}), 403
+        return jsonify({"error_message": "akun telah di suspend."}), 401
     
     payload = {
         'user_id': user.id,
