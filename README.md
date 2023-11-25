@@ -1,4 +1,4 @@
-# Twitter-like Bank End project
+# Twitter-like Back-End project
 
 This is a backend application for a Twitter-like platform, built using Flask and SQLAlchemy. The backend provides essential functionalities such as user registration, tweet creation, user profiles, and moderation actions.
 
@@ -63,15 +63,29 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 
 [week21.postman_collection.json - Google Drive](https://drive.google.com/file/d/1I-ZAI0Ltrneg7fRYU1R4NQBLAEKiKoBb/view?usp=sharing)
 
-|              | Methods | Endpoint                   | Authorization      | Body                    |
+|              | Methods | Endpoint                   | Requirement & Authorization | Body                    |
 |:------------ |:-------:|:--------------------------:|:------------------:|:-----------------------:|
 | Register     | POST    | /auth/registration         | -                  | username, bio, password |
 | Login        | POST    | /auth/login                | -                  | username, password      |
-| Create Tweet | POST    | /tweet                     | user is_suspended? | tweet                   |
-| User Profile | GET     | /user-profile              | token              | -                       |
-| Follow       | POST    | /following/:target_user.id | token              | -                       |
-| Flag spam    | POST    | /moderation/tweet          | moderator role     | tweet.id, is_spam       |
-| Suspend user | POST    | /moderation/user           | moderator role     | user.id, is_suspended   |
+| Create Tweet | POST    | /tweet                     | bearer_token, user is_suspended? | tweet                   |
+| User Profile | GET     | /user-profile              | bearer_token              | -                       |
+| Follow       | POST    | /following/:target_user.id | bearer_token              | -                       |
+| Flag spam    | POST    | /moderation/tweet          | bearer_token, moderator role     | tweet.id, is_spam       |
+| Suspend user | POST    | /moderation/user           | bearer_token, moderator role     | user.id, is_suspended   |
+
+### Some feature images :
+- Suspended user in database: <br>
+
+![Screenshot_3](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/5057ebcd-8c8a-4da3-8962-baf613579a23)
+
+- Suspended user cannot create tweet: <br>
+
+![Screenshot_4](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/73b50eb6-95d2-4076-962b-fe519ea6a50b)
+
+- Flag Spam tweets in database: <br>
+
+![Screenshot_2](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/a20e1166-5bb3-477e-8e67-f02206c4c37e)
+
 
 ### User for Testing
 
@@ -84,7 +98,7 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 }
 ```
 
-- user
+- User
 
 ```json
 {
