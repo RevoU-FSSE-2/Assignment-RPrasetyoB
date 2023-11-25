@@ -1,4 +1,4 @@
-# Twitter-like Bank End project
+# Twitter-like Back-End project
 
 This is a backend application for a Twitter-like platform, built using Flask and SQLAlchemy. The backend provides essential functionalities such as user registration, tweet creation, user profiles, and moderation actions.
 
