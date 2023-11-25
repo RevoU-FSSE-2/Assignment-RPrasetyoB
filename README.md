@@ -78,7 +78,11 @@ https://documenter.getpostman.com/view/29092304/2s9YeD7sxj
 
 ![Screenshot_3](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/5057ebcd-8c8a-4da3-8962-baf613579a23)
 
-- Suspended user cannot create tweet: <br>
+- Suspended user cannot login: <br>
+
+![Screenshot_5](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/ef1b0b22-3ce5-492f-8512-d0e25f320fc7)
+
+- If suspended user have last login token and still not expired, user still cannot create tweet: <br>
 
 ![Screenshot_4](https://github.com/RevoU-FSSE-2/Assignment-RPrasetyoB/assets/129088807/73b50eb6-95d2-4076-962b-fe519ea6a50b)
 
