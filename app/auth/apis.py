@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, jsonify, request
 from app.common.bcrypt import bcrypt
 from app.user.models import User
 from db import db
@@ -63,6 +63,9 @@ def login():
     valid_password = bcrypt.check_password_hash(user.password, password)
     if not valid_password:
         return {"error": "Username atau password tidak tepat"}, 400
+    
+    if user.is_suspended:
+        return jsonify({"error_message": "akun telah di suspend."}), 403
     
     payload = {
         'user_id': user.id,
